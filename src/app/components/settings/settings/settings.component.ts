@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { AppComponent } from 'src/app/app.component';
 import { userSelectors } from 'src/app/state/user/user.selectors';
 
 @Component({
@@ -41,5 +42,9 @@ export class SettingsComponent {
 
   submitDsar() {
     window.location.href = 'https://app.termly.io/notify/21747064-79f3-4373-8daa-090f67164a1e';
+  }
+
+  toggleDarkMode() {
+    AppComponent.toggleDarkMode();
   }
 }
