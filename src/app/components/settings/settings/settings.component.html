@@ -46,6 +46,14 @@
   </mat-card-actions>
 </mat-card>
 
+<mat-card>
+  <mat-card-title>Toggle Dark Mode</mat-card-title>
+  <mat-card-content>Turn dark mode on and off.</mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="toggleDarkMode()">Toggle</button>
+  </mat-card-actions>
+</mat-card>
+
 <ng-template #cookiePreferencesDialogRef>
   <mat-dialog-content>
     <app-cookie-preferences></app-cookie-preferences>

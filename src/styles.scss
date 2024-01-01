@@ -3,7 +3,32 @@
 @use 'assets/styles/theme.scss';
 
 html, body { height: 100%; overflow: hidden; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  .nav-item {
+    color: black;
+  }
+}
+
+body.dark-mode {
+  .mat-drawer-content {
+    background-color: #282828;
+  }
+
+  app-bottom-bar {
+    background-color: #383838;
+
+    .action:not(.active) {
+      color: white;
+    }
+  }
+
+  .nav-item:not(.active) {
+    color: white;
+  }
+}
 
 .mat-chip-selected {
   background-color: $primary-color !important;
