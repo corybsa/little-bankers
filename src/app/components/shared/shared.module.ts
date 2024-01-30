@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardsComponent } from './cards/cards.component';
+import { CardContentDirective, CardSubTitleDirective, CardTitleDirective, CardsComponent } from './cards/cards.component';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,9 @@ import { NumberSpinnerComponent } from './number-spinner/number-spinner.componen
 @NgModule({
   declarations: [
     CardsComponent,
+    CardTitleDirective,
+    CardSubTitleDirective,
+    CardContentDirective,
     ChristmasComponent,
     NumberSpinnerComponent
   ],
@@ -25,6 +28,9 @@ import { NumberSpinnerComponent } from './number-spinner/number-spinner.componen
   ],
   exports: [
     CardsComponent,
+    CardTitleDirective,
+    CardSubTitleDirective,
+    CardContentDirective,
     ChristmasComponent,
     NumberSpinnerComponent
   ]
