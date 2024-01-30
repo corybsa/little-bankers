@@ -1,8 +1,17 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChildren, Directive, EventEmitter, Input, Output, QueryList, TemplateRef } from '@angular/core';
 import { ICardButton } from 'src/app/models/card/card-button';
 import { CardTypes } from 'src/app/models/card/card-types';
 import { Helper } from 'src/app/models/helper';
+
+@Directive({ selector: '[cardTitle]' })
+export class CardTitleDirective {}
+
+@Directive({ selector: '[cardSubTitle]' })
+export class CardSubTitleDirective {}
+
+@Directive({ selector: '[cardContent]' })
+export class CardContentDirective {}
 
 @Component({
   selector: 'app-cards',
@@ -14,18 +23,19 @@ export class CardsComponent {
   @Input() reorderable: boolean = false;
   @Input() enableSlide: boolean = false;
   @Input() buttons?: [ICardButton, ICardButton?];
-  @Input() isRecipe = false;
-  @Input() isSharedRecipe = false;
-  @Input() isIngredient = false;
-  @Input() isCart = false;
 
   @Output() onDrop = new EventEmitter();
   @Output() onClick = new EventEmitter();
   @Output() onTitleClick = new EventEmitter();
-  @Output() onAddToCart = new EventEmitter();
-  @Output() onDelete = new EventEmitter();
-  @Output() onDone = new EventEmitter();
-  @Output() onUndone = new EventEmitter();
+
+  @ContentChildren(CardTitleDirective, { read: TemplateRef })
+  titleTemplates?: QueryList<any>;
+
+  @ContentChildren(CardSubTitleDirective, { read: TemplateRef })
+  subTitleTemplates?: QueryList<any>;
+
+  @ContentChildren(CardContentDirective, { read: TemplateRef })
+  contentTemplates?: QueryList<any>;
 
   revealingCard: any = null;
   isRevealing = false;
@@ -60,22 +70,6 @@ export class CardsComponent {
     }
 
     this.onClick.emit(item);
-  }
-
-  addToCart(item: CardTypes) {
-    this.onAddToCart.emit(item);
-  }
-
-  deleteItem(item: CardTypes) {
-    this.onDelete.emit(item);
-  }
-
-  markDone(item: CardTypes) {
-    this.onDone.emit(item);
-  }
-
-  undoDone(item: CardTypes) {
-    this.onUndone.emit(item);
   }
 
   startDrag($event: MouseEvent | TouchEvent) {
