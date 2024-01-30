@@ -1,0 +1,29 @@
+<app-cards
+  [data]="data"
+>
+  @for(item of data; track item.id) {
+    <ng-template cardTitle let-item>
+      @if(item.type === 'send') {
+        You paid <span>{{ item.to }}</span>
+      } @else {
+        <span>{{ item.from }}</span> paid you
+      }
+    </ng-template>
+    <ng-template cardSubTitle let-item>{{ item.description }}</ng-template>
+    <ng-template cardContent let-item>
+      <span
+        class="transation-amount"
+        [ngClass]="{
+          send: item.type === 'send',
+          receive: item.type === 'receive'
+        }"
+      >
+        @if(item.type === 'send') {
+          - ${{ item.amount }}
+        } @else {
+          + ${{ item.amount }}
+        }
+      </span>
+    </ng-template>
+  }
+</app-cards>

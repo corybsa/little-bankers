@@ -1,0 +1,11 @@
+@use '/src/assets/styles/variables.scss' as *;
+
+#account-balance {
+  position: absolute;
+  bottom: calc($bottom-bar-height + 20px);
+  right: 1rem;
+
+  span {
+    font-weight: bold;
+  }
+}

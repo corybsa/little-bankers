@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TransactionsModule } from '../transactions/transactions.module';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [TransactionsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

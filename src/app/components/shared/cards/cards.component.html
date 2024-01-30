@@ -2,41 +2,54 @@
   cdkDropList
   (cdkDropListDropped)="drop($event)"
 >
-  <div *ngFor="let item of data" class="card-container">
-    <mat-card
-      [class.reorderable]="reorderable"
-      [class.static-list]="!reorderable"
-      cdkDrag
-      [cdkDragDisabled]="!reorderable"
-      (click)="click(item, $event)"
-      (mousedown)="startDrag($event)"
-      (mousemove)="drag($event)"
-      (mouseup)="endDrag()"
-      (touchstart)="startDrag($event)"
-      (touchmove)="drag($event)"
-      (touchend)="endDrag()"
-      (touchcancel)="endDrag()"
-    >
-      @if(reorderable) {
-        <mat-icon class="drag-handle" cdkDragHandle>drag_handle</mat-icon>
-      }
-      <mat-card-title>
-        <span>
-          <ng-content select="[title]"></ng-content>
-        </span>
-      </mat-card-title>
-      <mat-card-subtitle>
-        <ng-content select="[subtitle]"></ng-content>
-      </mat-card-subtitle>
-    </mat-card>
+  @for(item of data; track $index) {
+    <div class="card-container">
+      <mat-card
+        [class.reorderable]="reorderable"
+        [class.static-list]="!reorderable"
+        cdkDrag
+        [cdkDragDisabled]="!reorderable"
+        (click)="click(item, $event)"
+        (mousedown)="startDrag($event)"
+        (mousemove)="drag($event)"
+        (mouseup)="endDrag()"
+        (touchstart)="startDrag($event)"
+        (touchmove)="drag($event)"
+        (touchend)="endDrag()"
+        (touchcancel)="endDrag()"
+      >
+        @if(reorderable) {
+          <mat-icon class="drag-handle" cdkDragHandle>drag_handle</mat-icon>
+        }
 
-    <button
-      *ngFor="let button of buttons"
-      mat-stroked-button
-      class="card-action"
-      [ngClass]="button!.color"
-      (click)="buttonClick(button!, item)">
-      <mat-icon>{{ getButtonIcon(button!, item) }}</mat-icon>
-    </button>
-  </div>
+        @if(titleTemplates?.get($index)) {
+          <mat-card-title>
+            <ng-template *ngTemplateOutlet="titleTemplates!.get($index); context: { $implicit: item }"></ng-template>
+          </mat-card-title>
+        }
+
+        @if(subTitleTemplates?.get($index)) {
+          <mat-card-subtitle>
+            <ng-template *ngTemplateOutlet="subTitleTemplates!.get($index); context: { $implicit: item }"></ng-template>
+          </mat-card-subtitle>
+        }
+
+        @if(contentTemplates?.get($index)) {
+          <ng-template *ngTemplateOutlet="contentTemplates!.get($index); context: { $implicit: item }"></ng-template>
+        }
+      </mat-card>
+
+      @for(button of buttons; track $index) {
+        <button
+          mat-stroked-button
+          class="card-action"
+          [ngClass]="button!.color"
+          (click)="buttonClick(button!, item)"
+        >
+          <mat-icon>{{ getButtonIcon(button!, item) }}</mat-icon>
+        </button>
+      }
+    </div>
+  }
+  
 </div>

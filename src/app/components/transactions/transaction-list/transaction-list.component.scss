@@ -1,0 +1,21 @@
+:host ::ng-deep mat-card-title {
+  font-weight: normal;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.transation-amount {
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+
+  &.send {
+    color: red;
+  }
+
+  &.receive {
+    color: hsl(120, 100%, 40%);
+  }
+}
